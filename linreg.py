@@ -43,8 +43,17 @@ ax.plot('Time', 'Hardcover', data=df, color='0.75')
 ax = sns.regplot(x='Time', y='Hardcover', data=df, ci=None, scatter_kws=dict(color='0.25'))
 ax.set_title('Time Plot of Hardcover Sales');
 
+df['Lag_1'] = df['Hardcover'].shift(1)
+df = df.reindex(columns=['Hardcover', 'Lag_1'])
 
+print(
+df.head()
+)
 
+fig2, ax2 = plt.subplots()
+ax2 = sns.regplot(x='Lag_1', y='Hardcover', data=df, ci=None, scatter_kws=dict(color='0.25'))
+ax2.set_aspect('equal')
+ax2.set_title('Lag Plot of Hardcover Sales');
 
 
 plt.show()
